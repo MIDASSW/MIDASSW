@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 4
+names: ['alligator', 'longitudnal', 'pothole', 'transverse']
+
+roboflow:
+  workspace: gggg-h2igo
+  project: pp-9y5dh
+  version: 2
+  license: Public Domain
+  url: https://universe.roboflow.com/gggg-h2igo/pp-9y5dh/dataset/2
