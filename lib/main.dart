@@ -9,7 +9,6 @@ import 'CameraPage.dart';
 import 'ReportPage.dart';
 import 'SettingsPage.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -20,8 +19,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+        ),
       ),
-         localizationsDelegates: [
+      localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -29,7 +32,6 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         const Locale('ko', 'KR'), // 한국어
       ],
-
       home: MyHomePage(),
     );
   }
@@ -42,7 +44,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  // final screenSize = MediaQuery.of(context).size.width; 동적으로 크기 가져오기
 
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
@@ -63,10 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      // appBar: AppBar(
-      //  // title: Text('Bottom Navigation Bar Example'),
-      // ),
-      backgroundColor:Colors.white,
+      backgroundColor: Colors.white,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

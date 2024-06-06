@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:location/location.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ReportPage extends StatefulWidget {
   @override
@@ -10,6 +13,14 @@ class ReportPage extends StatefulWidget {
 class _ReportPageState extends State<ReportPage> {
   DateTime? _selectedDate;
   File? _image;
+  double lat = 0;
+  double lng = 0;
+  String address = '';
+  Location location = Location();
+  bool _serviceEnabled = true;
+  late PermissionStatus _permissionGranted;
+
+  final TextEditingController _locationController = TextEditingController();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -87,6 +98,49 @@ class _ReportPageState extends State<ReportPage> {
     });
   }
 
+  Future<void> _locateMe() async {
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    await location.getLocation().then((value) async {
+      setState(() {
+        lat = value.latitude!;
+        lng = value.longitude!;
+      });
+
+      // 역지오코딩 수행
+      final apiKey = 'AIzaSyBS9eBoziroOVJYfMoJ6iE6CZKcmA4DRZc'; // 구글 지오코딩 API 키
+      final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$apiKey';
+
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final decoded = json.decode(response.body);
+        final formattedAddress = decoded['results'][0]['formatted_address'];
+        setState(() {
+          address = formattedAddress;
+          _locationController.text = address;
+        });
+      } else {
+        setState(() {
+          address = 'Failed to fetch address';
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,12 +211,14 @@ class _ReportPageState extends State<ReportPage> {
                         decoration: InputDecoration(
                           labelText: '위치', // 힌트 텍스트 설정
                         ),
+                        controller: _locationController,
+                        readOnly: true,
                       ),
                     ),
                     IconButton(
                       icon: Icon(Icons.add),
-                      onPressed: () {
-                        // 팝업창 표시 코드 작성
+                      onPressed: () async {
+                        await _locateMe();
                       },
                     ),
                   ],
