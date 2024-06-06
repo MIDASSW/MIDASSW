@@ -359,18 +359,3 @@ class _SoundLevelDialogState extends State<SoundLevelDialog> {
     );
   }
 }
-
-// Placeholder for PasswordChangePage
-// class PasswordChangePage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('비밀번호 변경'),
-//       ),
-//       body: Center(
-//         child: Text('비밀번호 변경 페이지'),
-//       ),
-//     );
-//   }
-// }

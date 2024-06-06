@@ -6,7 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'HomePage.dart'; //페이지 임포트
 import 'NearbyPage.dart'; 
-import 'CameraPage.dart';
 import 'ReportPage.dart';
 import 'SettingsPage.dart';
 
@@ -51,7 +50,6 @@ class _MyHomePageState extends State<MyHomePage> {
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     NearbyPage(),
-    CameraPage(),
     ReportPage(),
     SettingsPage(),
   ];
@@ -82,10 +80,6 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.location_on),
             label: '내 주변',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.photo_camera),
-            label: '촬영',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

@@ -34,14 +34,14 @@ class _ReportPageState extends State<ReportPage> {
         return Theme(
           data: ThemeData.light().copyWith(
             colorScheme: ColorScheme.light(
-              primary: Colors.grey, // 선택된 날짜 색상
-              onPrimary: Colors.white, // 선택된 날짜의 텍스트 색상
-              surface: Colors.white, // 배경색
-              onSurface: Colors.grey, // 텍스트 색상
+              primary: Colors.grey,
+              onPrimary: Colors.white,
+              surface: Colors.white,
+              onSurface: Colors.grey,
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                foregroundColor: Colors.black, // "취소"와 "확인" 버튼 색상
+                foregroundColor: Colors.black,
               ),
             ),
           ),
@@ -122,8 +122,7 @@ class _ReportPageState extends State<ReportPage> {
         lng = value.longitude!;
       });
 
-      // 역지오코딩 수행
-      final apiKey = dotenv.env['appKey']; // 구글 지오코딩 API 키
+      final apiKey = dotenv.env['appKey'];
       final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$apiKey';
 
       final response = await http.get(Uri.parse(url));
@@ -148,10 +147,11 @@ class _ReportPageState extends State<ReportPage> {
       appBar: AppBar(
         title: Text(
           '제보하기',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
         backgroundColor: Colors.white,
         centerTitle: true,
+        elevation: 0,
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -159,20 +159,32 @@ class _ReportPageState extends State<ReportPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 15),
+              SizedBox(height: 20),
               GestureDetector(
                 onTap: _showImagePickerDialog,
                 child: _image == null
-                    ? Icon(
-                        Icons.add_photo_alternate,
-                        size: 200,
-                        color: Colors.grey,
-                      )
-                    : Image.file(
-                        _image!,
+                    ? Container(
                         width: 200,
                         height: 200,
-                        fit: BoxFit.cover,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Colors.grey[400]!),
+                        ),
+                        child: Icon(
+                          Icons.add_photo_alternate,
+                          size: 100,
+                          color: Colors.grey,
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.file(
+                          _image!,
+                          width: 200,
+                          height: 200,
+                          fit: BoxFit.cover,
+                        ),
                       ),
               ),
               SizedBox(height: 20),
@@ -181,43 +193,57 @@ class _ReportPageState extends State<ReportPage> {
                 child: Stack(
                   alignment: Alignment.topRight,
                   children: <Widget>[
-                    Flexible(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: '날짜', // 힌트 텍스트 설정
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: '날짜',
+                        labelStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.grey),
                         ),
-                        controller: TextEditingController(
-                          text: _selectedDate != null
-                              ? '${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}'
-                              : '',
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.grey),
                         ),
-                        readOnly: true,
                       ),
+                      controller: TextEditingController(
+                        text: _selectedDate != null
+                            ? '${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}'
+                            : '',
+                      ),
+                      readOnly: true,
                     ),
                     IconButton(
-                      icon: Icon(Icons.add),
+                      icon: Icon(Icons.date_range, color: Colors.grey),
                       onPressed: () => _selectDate(context),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               Container(
                 width: 300,
                 child: Stack(
                   alignment: Alignment.topRight,
                   children: <Widget>[
-                    Flexible(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: '위치', // 힌트 텍스트 설정
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: '위치',
+                        labelStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.grey),
                         ),
-                        controller: _locationController,
-                        readOnly: true,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
                       ),
+                      controller: _locationController,
+                      readOnly: true,
                     ),
                     IconButton(
-                      icon: Icon(Icons.add),
+                      icon: Icon(Icons.location_on, color: Colors.grey),
                       onPressed: () async {
                         await _locateMe();
                       },
@@ -228,14 +254,14 @@ class _ReportPageState extends State<ReportPage> {
               SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () {
-                  //사진을 찍었을때 이미지를 저장할수 있도록 한다.
+                  // 사진을 찍었을 때 이미지를 저장할 수 있도록 한다.
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                     const Color.fromARGB(255, 196, 196, 196),
                   ),
                   fixedSize: MaterialStateProperty.all<Size>(
-                    const Size(160, 20),
+                    const Size(160, 50),
                   ),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
@@ -243,7 +269,7 @@ class _ReportPageState extends State<ReportPage> {
                     ),
                   ),
                 ),
-                child: const Text('전송하기', style: TextStyle(color: Colors.white)),
+                child: const Text('전송하기', style: TextStyle(color: Colors.white, fontSize: 16)),
               ),
             ],
           ),
