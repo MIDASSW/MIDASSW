@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:location/location.dart';
@@ -122,7 +123,7 @@ class _ReportPageState extends State<ReportPage> {
       });
 
       // 역지오코딩 수행
-      final apiKey = 'AIzaSyBS9eBoziroOVJYfMoJ6iE6CZKcmA4DRZc'; // 구글 지오코딩 API 키
+      final apiKey = dotenv.env['appKey']; // 구글 지오코딩 API 키
       final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$apiKey';
 
       final response = await http.get(Uri.parse(url));
