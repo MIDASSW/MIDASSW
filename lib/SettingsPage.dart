@@ -70,7 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _playSound() async {
     await _audioPlayer.setVolume(_volume); // 현재 볼륨 설정
-    await _audioPlayer.play(AssetSource('alarm_warning.mp3'));
+    await _audioPlayer.play(AssetSource('audio/alarm_warning.mp3'));
   }
 
   void _stopSound() async {
