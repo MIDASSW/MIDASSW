@@ -4,10 +4,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+
 import 'HomePage.dart'; //페이지 임포트
-import 'NearbyPage.dart'; 
 import 'ReportPage.dart';
 import 'SettingsPage.dart';
+import 'MyNearbyPage.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    NearbyPage(),
+    MyNearbyPage(),
     ReportPage(),
     SettingsPage(),
   ];

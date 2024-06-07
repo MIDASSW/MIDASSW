@@ -3,27 +3,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
 
-// 다른 페이지로 이동할 수 있도록 새 페이지 생성
-class RecentCrackPage extends StatelessWidget {
+class RecentCrackListPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('최근 크랙'),
-      ),
-      body: Center(
-        child: Text('최근 크랙 페이지입니다.'),
-      ),
-    );
-  }
+  _RecentCrackListPageState createState() => _RecentCrackListPageState();
 }
 
-class NearbyPage extends StatefulWidget {
-  @override
-  _NearbyPageState createState() => _NearbyPageState();
-}
-
-class _NearbyPageState extends State<NearbyPage> {
+class _RecentCrackListPageState extends State<RecentCrackListPage> {
   List<Crack> cracks = [];
   bool isLoading = true;
 
@@ -40,7 +25,7 @@ class _NearbyPageState extends State<NearbyPage> {
       final List<dynamic> crackData = json.decode(response.body).take(10).toList(); // 상위 10개 데이터만 사용
       setState(() {
         cracks = crackData.map((data) => Crack.fromJson(data)).toList();
-        cracks.sort((a, b) => a.distance.compareTo(b.distance)); // 임의의 거리 정렬
+        cracks.sort((a, b) => DateTime.parse(b.timestamp).compareTo(DateTime.parse(a.timestamp))); // 최근 일시 순으로 정렬
         isLoading = false;
       });
     } else {
@@ -51,40 +36,6 @@ class _NearbyPageState extends State<NearbyPage> {
   String formatDate(String dateTime) {
     DateTime dt = DateTime.parse(dateTime);
     return DateFormat('yyyy-MM-dd').format(dt); // 시간 없이 날짜만 반환
-  }
-
-  void _showDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white,
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                title: Text('최근 크랙'),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => RecentCrackPage(),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text('내 주변 크랙'),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  // 내 주변 크랙 페이지 그대로 유지
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
   }
 
   @override
@@ -102,18 +53,12 @@ class _NearbyPageState extends State<NearbyPage> {
         ),
         title: Center(
           child: Text(
-            '내 주변 크랙',
+            '최근 크랙',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
         automaticallyImplyLeading: false,
         leadingWidth: 40,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.more_vert),
-            onPressed: _showDialog,
-          ),
-        ],
         elevation: 0, // 스크롤 시 앱바의 그림자를 없앰
       ),
       body: Column(
@@ -196,9 +141,9 @@ class Crack {
   factory Crack.fromJson(Map<String, dynamic> json) {
     return Crack(
       imageUrl: json['url'],
-      timestamp: DateTime.now().toString(),
+      timestamp: DateTime.now().toString(), // 실제 데이터가 있다면 여기에 적절한 값을 사용해야 합니다.
       title: json['title'],
-      distance: (json['id'] % 10).toDouble(), // 임의의 거리 값 설정
+      distance: (json['id'] % 10).toDouble(),
     );
   }
 }
