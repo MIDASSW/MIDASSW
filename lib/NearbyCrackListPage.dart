@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
-import 'package:flutter_crackdetectcamera/MyNearbyPage.dart';
 
 class NearbyCrackListPage extends StatefulWidget {
   @override
