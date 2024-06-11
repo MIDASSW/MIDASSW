@@ -10,6 +10,10 @@ class _PasswordChangePageState extends State<PasswordChangePage> {
   final TextEditingController _newPasswordController = TextEditingController();
   final TextEditingController _confirmNewPasswordController = TextEditingController();
 
+   bool _isPasswordVisible1 = false;
+   bool _isPasswordVisible2= false;
+   bool _isPasswordVisible3 = false;
+
   @override
   void dispose() {
     _oldPasswordController.dispose();
@@ -40,33 +44,84 @@ class _PasswordChangePageState extends State<PasswordChangePage> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            TextField(
-              controller: _oldPasswordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: '기존 비밀번호 입력',
+              TextField(
+                controller: _oldPasswordController,
+                decoration: InputDecoration(
+                  hintText: '기존 비밀번호 입력',
+                  hintStyle: const TextStyle(
+                    color: Color.fromARGB(255, 173, 174, 174),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      // 비밀번호 가시성에 따라 아이콘 변경
+                      _isPasswordVisible1
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: const Color.fromARGB(255, 173, 174, 174),
+                    ),
+                    onPressed: () {
+                      // 비밀번호 가시성 상태 토글
+                      setState(() {
+                        _isPasswordVisible1 = !_isPasswordVisible1;
+                      });
+                    },
+                  ),
+                ),
               ),
-            ),
             SizedBox(height: 30),
-            TextField(
-              controller: _newPasswordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: '새로운 비밀번호 입력',
+              TextField(
+                controller: _newPasswordController,
+                decoration: InputDecoration(
+                  hintText: '새로운 비밀번호 입력',
+                  hintStyle: const TextStyle(
+                    color: Color.fromARGB(255, 173, 174, 174),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      // 비밀번호 가시성에 따라 아이콘 변경
+                      _isPasswordVisible2
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: const Color.fromARGB(255, 173, 174, 174),
+                    ),
+                    onPressed: () {
+                      // 비밀번호 가시성 상태 토글
+                      setState(() {
+                        _isPasswordVisible2 = !_isPasswordVisible2;
+                      });
+                    },
+                  ),
+                ),
               ),
-            ),
             SizedBox(height: 30),
-            TextField(
-              controller: _confirmNewPasswordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: '새로운 비밀번호 다시 입력',
+                          TextField(
+                controller: _confirmNewPasswordController,
+                decoration: InputDecoration(
+                  hintText: '새로운 비밀번호 다시 입력',
+                  hintStyle: const TextStyle(
+                    color: Color.fromARGB(255, 173, 174, 174),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      // 비밀번호 가시성에 따라 아이콘 변경
+                      _isPasswordVisible3
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: const Color.fromARGB(255, 173, 174, 174),
+                    ),
+                    onPressed: () {
+                      // 비밀번호 가시성 상태 토글
+                      setState(() {
+                        _isPasswordVisible3 = !_isPasswordVisible3;
+                      });
+                    },
+                  ),
+                ),
               ),
-            ),
             SizedBox(height: 40),
                ElevatedButton(
                     onPressed: () {
-                      //사진을 찍었을때 이미지를 저장할수 있도록 한다.
+                    
                     },
                     style: ButtonStyle(
                       backgroundColor:  MaterialStateProperty.all<Color>(const Color.fromARGB(255, 196, 196, 196)),

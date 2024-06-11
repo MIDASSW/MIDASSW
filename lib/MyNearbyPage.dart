@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -22,17 +21,28 @@ class _MyNearbyPageState extends State<MyNearbyPage> {
   }
 
   Future<void> fetchCracks() async {
-    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
+    try {
+      final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
 
-    if (response.statusCode == 200) {
-      final List<dynamic> crackData = json.decode(response.body).take(5).toList(); // 상위 5개 데이터만 사용
-      setState(() {
-        cracks = crackData.map((data) => Crack.fromJson(data)).toList();
-        cracks.sort((a, b) => a.distance.compareTo(b.distance)); // 위치 기준으로 정렬
-        isLoading = false;
-      });
-    } else {
-      throw Exception('Failed to load cracks');
+      if (response.statusCode == 200) {
+        final List<dynamic> crackData = json.decode(response.body).take(5).toList(); // 상위 5개 데이터만 사용
+        if (mounted) {
+          setState(() {
+            cracks = crackData.map((data) => Crack.fromJson(data)).toList();
+            cracks.sort((a, b) => a.distance.compareTo(b.distance)); // 위치 기준으로 정렬
+            isLoading = false;
+          });
+        }
+      } else {
+        throw Exception('Failed to load cracks');
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+      // 오류 처리를 추가할 수 있습니다.
     }
   }
 
@@ -165,4 +175,3 @@ class Crack {
     );
   }
 }
-

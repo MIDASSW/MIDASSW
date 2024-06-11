@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: ReportPage(),
+      locale: Locale('ko', 'KR'),
+      supportedLocales: [
+        const Locale('ko', 'KR'), // Korean
+        // Add other supported locales here
+      ],
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+    );
+  }
+}
 
 class ReportPage extends StatefulWidget {
   @override
@@ -50,9 +70,11 @@ class _ReportPageState extends State<ReportPage> {
       },
     );
     if (pickedDate != null && pickedDate != _selectedDate) {
-      setState(() {
-        _selectedDate = pickedDate;
-      });
+      if (mounted) {
+        setState(() {
+          _selectedDate = pickedDate;
+        });
+      }
     }
   }
 
@@ -92,11 +114,13 @@ class _ReportPageState extends State<ReportPage> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: source);
 
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      }
-    });
+    if (mounted) {
+      setState(() {
+        if (pickedFile != null) {
+          _image = File(pickedFile.path);
+        }
+      });
+    }
   }
 
   Future<void> _locateMe() async {
@@ -117,10 +141,12 @@ class _ReportPageState extends State<ReportPage> {
     }
 
     await location.getLocation().then((value) async {
-      setState(() {
-        lat = value.latitude!;
-        lng = value.longitude!;
-      });
+      if (mounted) {
+        setState(() {
+          lat = value.latitude!;
+          lng = value.longitude!;
+        });
+      }
 
       final apiKey = dotenv.env['appKey'];
       final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$apiKey';
@@ -129,14 +155,18 @@ class _ReportPageState extends State<ReportPage> {
       if (response.statusCode == 200) {
         final decoded = json.decode(response.body);
         final formattedAddress = decoded['results'][0]['formatted_address'];
-        setState(() {
-          address = formattedAddress;
-          _locationController.text = address;
-        });
+        if (mounted) {
+          setState(() {
+            address = formattedAddress;
+            _locationController.text = address;
+          });
+        }
       } else {
-        setState(() {
-          address = 'Failed to fetch address';
-        });
+        if (mounted) {
+          setState(() {
+            address = 'Failed to fetch address';
+          });
+        }
       }
     });
   }
