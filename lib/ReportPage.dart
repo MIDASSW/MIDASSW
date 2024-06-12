@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -7,24 +9,24 @@ import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ReportPage(),
-      locale: Locale('ko', 'KR'),
-      supportedLocales: [
-        const Locale('ko', 'KR'), // Korean
-        // Add other supported locales here
-      ],
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-    );
-  }
-}
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: ReportPage(),
+//       locale: Locale('ko', 'KR'),
+//       supportedLocales: [
+//         const Locale('ko', 'KR'), // Korean
+//         // Add other supported locales here
+//       ],
+//       localizationsDelegates: [
+//         GlobalMaterialLocalizations.delegate,
+//         GlobalWidgetsLocalizations.delegate,
+//         GlobalCupertinoLocalizations.delegate,
+//       ],
+//     );
+//   }
+// }
 
 class ReportPage extends StatefulWidget {
   @override
@@ -32,6 +34,7 @@ class ReportPage extends StatefulWidget {
 }
 
 class _ReportPageState extends State<ReportPage> {
+
   DateTime? _selectedDate;
   File? _image;
   double lat = 0;
@@ -223,7 +226,7 @@ class _ReportPageState extends State<ReportPage> {
                 child: Stack(
                   alignment: Alignment.topRight,
                   children: <Widget>[
-                    TextField(
+                    TextField( //오류 수정하기
                       decoration: InputDecoration(
                         labelText: '날짜',
                         labelStyle: TextStyle(color: Colors.grey),

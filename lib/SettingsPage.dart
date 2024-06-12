@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crackdetectcamera/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_crackdetectcamera/PasswordChangePage.dart';
@@ -102,7 +103,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 print('로그아웃 확인됨');
                 // 예시: 로그인 페이지로 이동
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => LoginPage(), // LoginPage로 대체해야 합니다.
+                  builder: (context) => const LoginScreen(), // LoginPage로 대체해야 합니다.
                 ));
               },
               child: Text('확인'),
@@ -410,16 +411,3 @@ class _SoundLevelDialogState extends State<SoundLevelDialog> {
 }
 
 // Assuming you have a LoginPage for logout navigation
-class LoginPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('로그인 페이지'),
-      ),
-      body: Center(
-        child: Text('로그인 페이지 컨텐츠'),
-      ),
-    );
-  }
-}
