@@ -98,7 +98,12 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
                                         '일시: ',
                                         style: TextStyle(fontWeight: FontWeight.bold), // "일시"를 볼드체로 표시
                                       ),
-                                      Text('${formatDate(crack.timestamp)}'),
+                                      Expanded(
+                                        child: Text(
+                                          '${formatDate(crack.timestamp)}',
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   Row(
@@ -107,7 +112,12 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
                                         '위치: ',
                                         style: TextStyle(fontWeight: FontWeight.bold), // "위치"를 볼드체로 표시
                                       ),
-                                      Text('${crack.title}'),
+                                      Expanded(
+                                        child: Text(
+                                          '${crack.title}',
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ],

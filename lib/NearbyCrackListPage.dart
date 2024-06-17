@@ -60,12 +60,15 @@ class _NearbyCrackListPageState extends State<NearbyCrackListPage> {
         automaticallyImplyLeading: false,
         elevation: 0, // 스크롤 시 앱바의 그림자를 없앰
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: isLoading
+      resizeToAvoidBottomInset: false, // 키보드가 올라올 때 화면 크기 조정 안 함
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            isLoading
                 ? Center(child: CircularProgressIndicator())
                 : ListView.separated(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: cracks.length,
                     separatorBuilder: (context, index) => Divider(color: Colors.grey.shade300),
                     itemBuilder: (context, index) {
@@ -97,7 +100,12 @@ class _NearbyCrackListPageState extends State<NearbyCrackListPage> {
                                         '일시: ',
                                         style: TextStyle(fontWeight: FontWeight.bold),
                                       ),
-                                      Text('${formatDate(crack.timestamp)}'),
+                                      Expanded(
+                                        child: Text(
+                                          '${formatDate(crack.timestamp)}',
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   Row(
@@ -106,7 +114,12 @@ class _NearbyCrackListPageState extends State<NearbyCrackListPage> {
                                         '위치: ',
                                         style: TextStyle(fontWeight: FontWeight.bold),
                                       ),
-                                      Text('${crack.title}'),
+                                      Expanded(
+                                        child: Text(
+                                          '${crack.title}',
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -117,8 +130,8 @@ class _NearbyCrackListPageState extends State<NearbyCrackListPage> {
                       );
                     },
                   ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

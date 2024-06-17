@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,32 +7,12 @@ import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: ReportPage(),
-//       locale: Locale('ko', 'KR'),
-//       supportedLocales: [
-//         const Locale('ko', 'KR'), // Korean
-//         // Add other supported locales here
-//       ],
-//       localizationsDelegates: [
-//         GlobalMaterialLocalizations.delegate,
-//         GlobalWidgetsLocalizations.delegate,
-//         GlobalCupertinoLocalizations.delegate,
-//       ],
-//     );
-//   }
-// }
-
 class ReportPage extends StatefulWidget {
   @override
   _ReportPageState createState() => _ReportPageState();
 }
 
 class _ReportPageState extends State<ReportPage> {
-
   DateTime? _selectedDate;
   File? _image;
   double lat = 0;
@@ -46,6 +24,7 @@ class _ReportPageState extends State<ReportPage> {
 
   final TextEditingController _locationController = TextEditingController();
 
+  // 날짜 선택 메서드
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -81,6 +60,7 @@ class _ReportPageState extends State<ReportPage> {
     }
   }
 
+  // 이미지 선택 다이얼로그 표시 메서드
   Future<void> _showImagePickerDialog() async {
     showDialog(
       context: context,
@@ -113,6 +93,7 @@ class _ReportPageState extends State<ReportPage> {
     );
   }
 
+  // 이미지 선택 메서드
   Future<void> _pickImage(ImageSource source) async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: source);
@@ -126,6 +107,7 @@ class _ReportPageState extends State<ReportPage> {
     }
   }
 
+  // 위치 정보 가져오기 메서드
   Future<void> _locateMe() async {
     _serviceEnabled = await location.serviceEnabled();
     if (!_serviceEnabled) {
@@ -151,7 +133,7 @@ class _ReportPageState extends State<ReportPage> {
         });
       }
 
-      final apiKey = dotenv.env['appKey'];
+      final apiKey = dotenv.env['appKey']; // .env 파일에서 API 키 가져오기
       final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$apiKey';
 
       final response = await http.get(Uri.parse(url));
@@ -163,7 +145,7 @@ class _ReportPageState extends State<ReportPage> {
             address = formattedAddress;
             _locationController.text = address;
           });
-        }
+        };
       } else {
         if (mounted) {
           setState(() {
@@ -172,6 +154,26 @@ class _ReportPageState extends State<ReportPage> {
         }
       }
     });
+  }
+
+  // 데이터를 서버로 전송하는 메서드
+  Future<void> sendData() async {
+    if (_image == null || _selectedDate == null || address.isEmpty) {
+      // 모든 필드가 채워져 있는지 확인합니다.
+      return;
+    }
+
+    var request = http.MultipartRequest('POST', Uri.parse('http://10.0.2.2:3000/uploads')); // Node.js 서버 URL 
+    request.files.add(await http.MultipartFile.fromPath('image', _image!.path));
+    request.fields['date'] = _selectedDate!.toIso8601String();
+    request.fields['location'] = address;
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      print('Uploaded successfully');
+    } else {
+      print('Failed to upload');
+    }
   }
 
   @override
@@ -194,7 +196,7 @@ class _ReportPageState extends State<ReportPage> {
             children: <Widget>[
               SizedBox(height: 20),
               GestureDetector(
-                onTap: _showImagePickerDialog,
+                onTap: _showImagePickerDialog, // 이미지 선택 다이얼로그 표시
                 child: _image == null
                     ? Container(
                         width: 200,
@@ -226,7 +228,7 @@ class _ReportPageState extends State<ReportPage> {
                 child: Stack(
                   alignment: Alignment.topRight,
                   children: <Widget>[
-                    TextField( //오류 수정하기
+                    TextField( // 날짜 입력 필드
                       decoration: InputDecoration(
                         labelText: '날짜',
                         labelStyle: TextStyle(color: Colors.grey),
@@ -248,7 +250,7 @@ class _ReportPageState extends State<ReportPage> {
                     ),
                     IconButton(
                       icon: Icon(Icons.date_range, color: Colors.grey),
-                      onPressed: () => _selectDate(context),
+                      onPressed: () => _selectDate(context), // 날짜 선택 다이얼로그 표시
                     ),
                   ],
                 ),
@@ -259,7 +261,7 @@ class _ReportPageState extends State<ReportPage> {
                 child: Stack(
                   alignment: Alignment.topRight,
                   children: <Widget>[
-                    TextField(
+                    TextField( // 위치 입력 필드
                       decoration: InputDecoration(
                         labelText: '위치',
                         labelStyle: TextStyle(color: Colors.grey),
@@ -278,7 +280,7 @@ class _ReportPageState extends State<ReportPage> {
                     IconButton(
                       icon: Icon(Icons.location_on, color: Colors.grey),
                       onPressed: () async {
-                        await _locateMe();
+                        await _locateMe(); // 위치 정보 가져오기
                       },
                     ),
                   ],
@@ -287,7 +289,7 @@ class _ReportPageState extends State<ReportPage> {
               SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () {
-                  // 사진을 찍었을 때 이미지를 저장할 수 있도록 한다.
+                  sendData(); // 서버로 데이터 전송
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(

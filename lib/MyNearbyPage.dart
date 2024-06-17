@@ -97,8 +97,12 @@ class _MyNearbyPageState extends State<MyNearbyPage> {
                             Text(
                               '일시: ${formatDate(crack.timestamp)}',
                               style: TextStyle(fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            Text('위치: ${crack.title}'),
+                            Text(
+                              '위치: ${crack.title}',
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ],
                         ),
                       );
@@ -139,8 +143,12 @@ class _MyNearbyPageState extends State<MyNearbyPage> {
                             Text(
                               '일시: ${formatDate(crack.timestamp)}',
                               style: TextStyle(fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            Text('위치: ${crack.title}'),
+                            Text(
+                              '위치: ${crack.title}',
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ],
                         ),
                       );
@@ -169,9 +177,9 @@ class Crack {
   factory Crack.fromJson(Map<String, dynamic> json) {
     return Crack(
       imageUrl: json['url'],
-      timestamp: DateTime.now().toString(),
+      timestamp: DateTime.now().toString(), // 실제 데이터가 있다면 여기에 적절한 값을 사용해야 합니다.
       title: json['title'],
-      distance: (json['id'] % 10).toDouble(),
+      distance: (json['id'] % 10).toDouble(), // 임의의 거리 값 설정
     );
   }
 }

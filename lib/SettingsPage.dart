@@ -82,37 +82,48 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
 
-  void _logout() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('로그아웃'),
-          content: Text('정말 로그아웃하시겠습니까?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // 다이얼로그 닫기
-              },
-              child: Text('취소'),
+void _logout() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: Colors.white,
+        title: Text('로그아웃'),
+        content: Text('정말 로그아웃하시겠습니까?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // 다이얼로그 닫기
+            },
+            child: Text('취소'),
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.black, // 텍스트 색상을 검정색으로 설정
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // 다이얼로그 닫기
-                // 로그아웃 로직 추가
-                print('로그아웃 확인됨');
-                // 예시: 로그인 페이지로 이동
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // 다이얼로그 닫기
+              // 로그아웃 로직 추가
+              print('로그아웃 확인됨');
+              // 로그인 페이지로 이동하며 이전 모든 페이지 제거
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
                   builder: (context) => const LoginScreen(), // LoginPage로 대체해야 합니다.
-                ));
-              },
-              child: Text('확인'),
+                ),
+                (Route<dynamic> route) => false,
+              );
+            },
+            child: Text('확인'),
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.black, // 텍스트 색상을 검정색으로 설정
             ),
-          ],
-        );
-      },
-    );
-  }
+          ),
+        ],
+      );
+    },
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {

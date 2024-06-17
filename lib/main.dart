@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
 
 //   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 //   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-//   await dotenv.load(fileName: ".env");
+//   await dotenv.load(fileName: ".env");pp
 //   runApp(const MyApp());
 // }
 
