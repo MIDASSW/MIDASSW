@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crackdetectcamera/login_screen.dart';
+import 'package:flutter_crackdetectcamera/LoginPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_crackdetectcamera/PasswordChangePage.dart';
@@ -108,7 +108,7 @@ void _logout() {
               // 로그인 페이지로 이동하며 이전 모든 페이지 제거
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
-                  builder: (context) => const LoginScreen(), // LoginPage로 대체해야 합니다.
+                  builder: (context) => const LoginPage(), // LoginPage로 대체해야 합니다.
                 ),
                 (Route<dynamic> route) => false,
               );

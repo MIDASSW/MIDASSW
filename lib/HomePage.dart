@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'ReportPage.dart';
 import 'SettingsPage.dart';
 import 'MyNearbyPage.dart';
-import 'locat.dart';
+import 'LocationPage.dart';
 
 class MyApp extends StatelessWidget {
 
@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-     LocatPage(),
+     LocationPage(),
      MyNearbyPage(),
      ReportPage(),
      SettingsPage(),

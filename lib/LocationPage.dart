@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart'; // Google Maps Flutter 패키지를 가져옵니다.
 import 'package:location/location.dart' as loc; // 위치 관련 기능을 사용하기 위해 필요합니다.
 
-class LocatPage extends StatefulWidget {
-  const LocatPage({super.key});
+class LocationPage extends StatefulWidget {
+  const LocationPage({super.key});
 
   @override
-  _LocatPageState createState() => _LocatPageState();
+  _LocationPageState createState() => _LocationPageState();
 }
 
-class _LocatPageState extends State<LocatPage> {
+class _LocationPageState extends State<LocationPage> {
   final Completer<GoogleMapController> _controllerCompleter = Completer(); // GoogleMapController를 완성하기 위한 Completer 객체입니다.
   late GoogleMapController _mapController; // GoogleMapController 객체입니다.
   loc.Location location = loc.Location(); // Location 객체를 생성합니다.
