@@ -13,8 +13,8 @@ class _SettingsPageState extends State<SettingsPage> {
   bool _firstToggle = false;
   bool _thirdToggle = false;
   final AudioPlayer _audioPlayer = AudioPlayer();
-  double _volume = 0.5; // 초기 볼륨 값을 0.5로 설정
-  final String _volumeKey = 'volume'; // SharedPreferences 키
+  double _volume = 0.5; 
+  final String _volumeKey = 'volume'; 
 
   @override
   void initState() {
@@ -22,7 +22,7 @@ class _SettingsPageState extends State<SettingsPage> {
     _loadVolume();
   }
 
-  // 사용자가 설정한 볼륨 값을 로드합니다.
+  
   Future<void> _loadVolume() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -30,7 +30,7 @@ class _SettingsPageState extends State<SettingsPage> {
     });
   }
 
-  // 사용자가 설정한 볼륨 값을 저장합니다.
+
   Future<void> _saveVolume(double volume) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setDouble(_volumeKey, volume);
@@ -41,18 +41,18 @@ class _SettingsPageState extends State<SettingsPage> {
       _firstToggle = value;
     });
 
-    // 토글이 켜졌을 때 조건을 확인하고 소리 재생
+ 
     if (_firstToggle) {
       _checkConditionAndPlaySound();
     } else {
-      _audioPlayer.stop(); // 토글이 꺼지면 소리 중지
+      _audioPlayer.stop();
     }
   }
 
-  // 특정 조건을 확인하고 소리를 재생하는 메서드
+
   void _checkConditionAndPlaySound() {
     if (_firstToggle) {
-      // 원하는 조건 추가
+     
       bool conditionMet = false; // 예제에서는 항상 참으로 설정 여기서 크랙이 50~200m내에 크랙이 감지되면 소리가 나는 코드 짜면 됩니다.
 
       if (conditionMet) {
@@ -93,29 +93,29 @@ void _logout() {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop(); // 다이얼로그 닫기
+              Navigator.of(context).pop(); 
             },
             child: Text('취소'),
             style: TextButton.styleFrom(
-              foregroundColor: Colors.black, // 텍스트 색상을 검정색으로 설정
+              foregroundColor: Colors.black, 
             ),
           ),
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop(); // 다이얼로그 닫기
-              // 로그아웃 로직 추가
+              Navigator.of(context).pop();
+             
               print('로그아웃 확인됨');
-              // 로그인 페이지로 이동하며 이전 모든 페이지 제거
+            
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
-                  builder: (context) => const LoginPage(), // LoginPage로 대체해야 합니다.
+                  builder: (context) => const LoginPage(), 
                 ),
                 (Route<dynamic> route) => false,
               );
             },
             child: Text('확인'),
             style: TextButton.styleFrom(
-              foregroundColor: Colors.black, // 텍스트 색상을 검정색으로 설정
+              foregroundColor: Colors.black, 
             ),
           ),
         ],
@@ -146,8 +146,8 @@ void _logout() {
                 width: 300,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Color(0xFFefefef), // 배경 색상 변경
-                  borderRadius: BorderRadius.circular(15), // 둥근 모서리 설정
+                  color: Color(0xFFefefef),
+                  borderRadius: BorderRadius.circular(15), 
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,12 +165,12 @@ void _logout() {
                             _toggleButton(value);
                           },
                           inactiveTrackColor: Colors.white,
-                          activeTrackColor: Colors.blue.withOpacity(0.5), // 활성화 시 트랙 색상
-                          activeColor: Colors.blue, // 활성화 시 스위치 색상
+                          activeTrackColor: Colors.blue.withOpacity(0.5),
+                          activeColor: Colors.blue, 
                         ),
                       ],
                     ),
-                    SizedBox(height: 8), // 텍스트와 토글 간격
+                    SizedBox(height: 8), 
                     Text(
                       "50~200m내에 크랙이 감지될때, 알림 소리가 나요.",
                       style: TextStyle(fontSize: 12, color: Colors.grey),
@@ -186,7 +186,7 @@ void _logout() {
                   onTap: _firstToggle
                       ? () {
                           print('알림크기설정 클릭됨');
-                          // 다이얼로그 팝업
+                          
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
@@ -196,11 +196,11 @@ void _logout() {
                                   setState(() {
                                     _volume = value;
                                   });
-                                  _audioPlayer.setVolume(_volume); // 슬라이더 이동 시 즉시 볼륨 조절
-                                  _saveVolume(value); // 설정한 볼륨 값을 저장
+                                  _audioPlayer.setVolume(_volume);
+                                  _saveVolume(value); 
                                 },
-                                playSound: _playSound, // 슬라이더 이동 시 소리 재생
-                                stopSound: _stopSound, // 다이얼로그 닫을 때 소리 중지
+                                playSound: _playSound, 
+                                stopSound: _stopSound, 
                               );
                             },
                           );
@@ -212,8 +212,8 @@ void _logout() {
                       width: 300,
                       height: 80,
                       decoration: BoxDecoration(
-                        color: Color(0xFFefefef), // Changed color to efefef
-                        borderRadius: BorderRadius.circular(15), // 둥근 모서리 설정
+                        color: Color(0xFFefefef), 
+                        borderRadius: BorderRadius.circular(15), 
                       ),
                       padding: EdgeInsets.all(16),
                       child: Row(
@@ -237,11 +237,11 @@ void _logout() {
                                             setState(() {
                                               _volume = value;
                                             });
-                                            _audioPlayer.setVolume(_volume); // 슬라이더 이동 시 즉시 볼륨 조절
-                                            _saveVolume(value); // 설정한 볼륨 값을 저장
+                                            _audioPlayer.setVolume(_volume);
+                                            _saveVolume(value); 
                                           },
-                                          playSound: _playSound, // 슬라이더 이동 시 소리 재생
-                                          stopSound: _stopSound, // 다이얼로그 닫을 때 소리 중지
+                                          playSound: _playSound, 
+                                          stopSound: _stopSound, 
                                         );
                                       },
                                     );
@@ -260,8 +260,8 @@ void _logout() {
                 width: 300,
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Color(0xFFefefef), // 배경 색상 변경
-                  borderRadius: BorderRadius.circular(15), // 둥근 모서리 설정
+                  color: Color(0xFFefefef), 
+                  borderRadius: BorderRadius.circular(15), 
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -279,8 +279,8 @@ void _logout() {
                             _togglePushNotification(value);
                           },
                           inactiveTrackColor: Colors.white,
-                          activeTrackColor: Colors.blue.withOpacity(0.5), // 활성화 시 트랙 색상
-                          activeColor: Colors.blue, // 활성화 시 스위치 색상
+                          activeTrackColor: Colors.blue.withOpacity(0.5),
+                          activeColor: Colors.blue, 
                         ),
                       ],
                     ),
@@ -298,8 +298,8 @@ void _logout() {
                 width: 300,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: Color(0xFFefefef), // Changed color to efefef
-                  borderRadius: BorderRadius.circular(15), // 둥근 모서리 설정
+                  color: Color(0xFFefefef),
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 padding: EdgeInsets.all(16),
                 child: Row(
@@ -312,7 +312,7 @@ void _logout() {
                     IconButton(
                       onPressed: () {
                         print('비밀번호변경 클릭됨');
-                        // Navigate to PasswordChangePage (Assuming you have a PasswordChangePage)
+                       
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => PasswordChangePage(),
                         ));
@@ -327,8 +327,8 @@ void _logout() {
                 width: 300,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: Color(0xFFefefef), // Changed color to efefef
-                  borderRadius: BorderRadius.circular(15), // 둥근 모서리 설정
+                  color: Color(0xFFefefef), 
+                  borderRadius: BorderRadius.circular(15), 
                 ),
                 padding: EdgeInsets.all(16),
                 child: Row(
@@ -353,12 +353,12 @@ void _logout() {
   }
 }
 
-// Assuming you have a dialog for setting sound level
+
 class SoundLevelDialog extends StatefulWidget {
   final double volume;
   final ValueChanged<double> onVolumeChanged;
   final VoidCallback playSound;
-  final VoidCallback stopSound; // 소리 중지 콜백 추가
+  final VoidCallback stopSound; 
 
   SoundLevelDialog({
     required this.volume,
@@ -381,44 +381,51 @@ class _SoundLevelDialogState extends State<SoundLevelDialog> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('알림 소리 크기 설정'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'Volume: ${(_currentVolume * 100).round()}%',
-            style: TextStyle(fontSize: 20),
-          ),
-          Slider(
-            value: _currentVolume,
-            min: 0.0,
-            max: 1.0,
-            divisions: 10,
-            label: '${(_currentVolume * 100).round()}%',
-            onChanged: (double value) {
-              setState(() {
-                _currentVolume = value;
-              });
-              widget.onVolumeChanged(value);
-              widget.playSound(); // 슬라이더 이동 시 소리 재생
-            },
-          ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            widget.onVolumeChanged(_currentVolume); // 닫기 버튼을 눌렀을 때 볼륨 저장
-            widget.stopSound(); // 닫기 버튼을 눌렀을 때 소리 중지
-            Navigator.of(context).pop();
+Widget build(BuildContext context) {
+  return AlertDialog(
+    backgroundColor: Colors.white, 
+    title: Text('알림 소리 크기 설정'),
+    content: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          'Volume: ${(_currentVolume * 100).round()}%',
+          style: TextStyle(fontSize: 20),
+        ),
+        Slider(
+          value: _currentVolume,
+          min: 0.0,
+          max: 1.0,
+          divisions: 10,
+          label: '${(_currentVolume * 100).round()}%',
+          onChanged: (double value) {
+            setState(() {
+              _currentVolume = value;
+            });
+            widget.onVolumeChanged(value);
+            widget.playSound();
           },
-          child: Text('닫기'),
+          activeColor: Colors.grey, 
+          inactiveColor: Colors.grey[300], 
         ),
       ],
-    );
-  }
+    ),
+    actions: [
+      TextButton(
+        onPressed: () {
+          widget.onVolumeChanged(_currentVolume); 
+          widget.stopSound(); 
+          Navigator.of(context).pop();
+        },
+        child: Text('닫기'),
+          style: TextButton.styleFrom(
+    foregroundColor: Colors.black, 
+  ),
+      ),
+    ],
+  );
 }
 
-// Assuming you have a LoginPage for logout navigation
+}
+
+

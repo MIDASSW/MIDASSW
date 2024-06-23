@@ -14,7 +14,7 @@ class _SelectPictureDialogState extends State<SelectPictureDialog> {
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Container(
-        height: 200.0, // 고정된 높이
+        height: 200.0,
         padding: EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -26,7 +26,7 @@ class _SelectPictureDialogState extends State<SelectPictureDialog> {
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                // 카메라 동작 추가
+                
               },
             ),
             SizedBox(height: 20),
@@ -37,7 +37,7 @@ class _SelectPictureDialogState extends State<SelectPictureDialog> {
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                // 앨범에서 선택 동작 추가
+              
               },
             ),
           ],

@@ -8,7 +8,7 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
+
   _LoginPageState createState() => _LoginPageState();
 }
 
@@ -16,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _phonenumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  bool _isPasswordVisible = false; // 비밀번호 가시성 상태 변수
+  bool _isPasswordVisible = false; 
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +26,14 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.white,
       ),
       backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: false, // 화면 오버플로우 문제 해결
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const SizedBox(height: 40), // 상단 여백 추가
+                const SizedBox(height: 40), 
                 TextField(
                   controller: _phonenumberController,
                   inputFormatters: <TextInputFormatter>[
@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                       icon: const Icon(Icons.highlight_off,
                           color: Color.fromARGB(255, 173, 174, 174)),
                       onPressed: () {
-                        // highlight_off 버튼 누르면 다 지워짐
+                       
                         _phonenumberController.clear();
                       },
                     ),
@@ -64,23 +64,23 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        // 비밀번호 가시성에 따라 아이콘 변경
+                     
                         _isPasswordVisible
                             ? Icons.visibility_off
                             : Icons.visibility,
                         color: const Color.fromARGB(255, 173, 174, 174),
                       ),
                       onPressed: () {
-                        // 비밀번호 가시성 상태 토글
+                  
                         setState(() {
                           _isPasswordVisible = !_isPasswordVisible;
                         });
                       },
                     ),
                   ),
-                  obscureText: !_isPasswordVisible, // 비밀번호 가시성 상태에 따라 업데이트
+                  obscureText: !_isPasswordVisible,
                 ),
-                const SizedBox(height: 20), // 버튼과 텍스트 필드 간격 추가
+                const SizedBox(height: 20), 
                 ElevatedButton(
                   onPressed: () {
                   if (_phonenumberController.text.isEmpty) {
@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                   }
                 
                   else {
-                    // 입력이 유효한 경우
+                
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => MyApp()),
                     );
@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                       style:
                           TextStyle(color: Color.fromARGB(255, 119, 118, 118))),
                 ),
-                const SizedBox(height: 20), // 버튼 간격 추가
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -148,13 +148,13 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       style: TextButton.styleFrom(
                         foregroundColor:
-                            const Color.fromARGB(255, 119, 118, 118), // 텍스트 색상 지정
+                            const Color.fromARGB(255, 119, 118, 118),
                       ),
                       child: const Text('회원가입'),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20), // 간격 추가
+                const SizedBox(height: 20), 
                 const Row(
                   children: <Widget>[
                     Expanded(
@@ -175,23 +175,23 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20), // 간격 추가
-                // 카카오로 시작하기 버튼
+                const SizedBox(height: 20), 
+               
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0), // 화면 가장자리와의 간격 조정
+                      horizontal: 16.0), 
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width *
-                        0.95, // 화면 너비의 95% 크기로 설정
+                        0.95, 
                     height: MediaQuery.of(context).size.height *
-                        0.05, // 화면 높이의 5% 크기로 설정
+                        0.05, 
                     child: TextButton(
                       onPressed: () {
-                        // 카카오 로그인 로직 구현
+                       
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: Colors.yellow,
-                        padding: const EdgeInsets.all(10), // 내부 여백
+                        padding: const EdgeInsets.all(10), 
                       ),
                       child: const Row(
                         children: [
@@ -206,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                           Expanded(
                             child: Text(
                               '카카오로 시작하기',
-                              textAlign: TextAlign.center, // 텍스트를 가운데 정렬
+                              textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.black),
                             ),
                           ),
@@ -215,19 +215,19 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10), // 간격 추가
-                // Apple로 시작하기 버튼
+                const SizedBox(height: 10), 
+                
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0), // 여백을 주어 화면 가장자리와의 간격을 조정
+                      horizontal: 16.0), 
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width *
-                        0.95, // 화면 너비의 80% 크기로 설정
+                        0.95, 
                     height: MediaQuery.of(context).size.height *
-                        0.05, // 화면 높이의 5% 크기로 설정
+                        0.05, 
                     child: TextButton(
                       onPressed: () {
-                        // Apple 로그인 로직 구현
+                        
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: Colors.grey,
@@ -246,7 +246,7 @@ class _LoginPageState extends State<LoginPage> {
                           Expanded(
                             child: Text(
                               'Apple로 시작하기',
-                              textAlign: TextAlign.center, // 텍스트를 가운데 정렬
+                              textAlign: TextAlign.center, 
                               style: TextStyle(color: Colors.black),
                             ),
                           ),
@@ -255,19 +255,19 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10), // 간격 추가
-                // 구글로 시작하기 버튼
+                const SizedBox(height: 10),
+               
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0), // 여백을 주어 화면 가장자리와의 간격을 조정
+                      horizontal: 16.0),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width *
-                        0.95, // 화면 너비의 80% 크기로 설정
+                        0.95,
                     height: MediaQuery.of(context).size.height *
-                        0.05, // 화면 높이의 5% 크기로 설정
+                        0.05, 
                     child: TextButton(
                       onPressed: () {
-                        // 구글 로그인 로직 구현
+                       
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 28, 183, 255),
@@ -286,7 +286,7 @@ class _LoginPageState extends State<LoginPage> {
                           Expanded(
                             child: Text(
                               '구글로 시작하기',
-                              textAlign: TextAlign.center, // 텍스트를 가운데 정렬
+                              textAlign: TextAlign.center,
                               style: TextStyle(color: Colors.black),
                             ),
                           ),
@@ -295,7 +295,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20), // 하단 여백 추가
+                const SizedBox(height: 20), 
               ]),
         ),
       ),

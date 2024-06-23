@@ -13,7 +13,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _isPasswordVisible = false; // 비밀번호 가시성 상태 변수
+  bool _isPasswordVisible = false;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -23,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final RegExp _phoneRegExp = RegExp(r'^\d+$');
   final RegExp _specialCharRegExp = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
 
-  // 추가된 변수: 각 필드의 오류 메시지를 저장
+ 
   String? _nameError;
   String? _emailError;
   String? _phoneError;
@@ -32,7 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
-    // 각 컨트롤러에 리스너 추가
+  
     _nameController.addListener(() => _validateName(_nameController.text));
     _emailController.addListener(() => _validateEmail(_emailController.text));
     _phoneController.addListener(() => _validatePhone(_phoneController.text));
@@ -48,7 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  // 수정된 함수: 실시간 유효성 검증 및 상태 업데이트
+ 
   void _validateName(String value) {
     setState(() {
       if (value.isEmpty || value.length == 1) {
@@ -136,10 +136,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         _nameController.clear();
                       },
                     ),
-                    // 추가된 부분: 오류 메시지 표시
+                  
                     errorText: _nameError,
                   ),
-                  // validator 함수를 사용하여 오류 메시지를 반환합니다
+                
                   validator: (value) {
                     if (value!.isEmpty || value.length == 1) {
                       return '이름을 입력해 주세요.';
@@ -167,7 +167,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         _emailController.clear();
                       },
                     ),
-                    // 추가된 부분: 오류 메시지 표시
+            
                     errorText: _emailError,
                   ),
                   validator: (value) {
@@ -197,7 +197,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         _phoneController.clear();
                       },
                     ),
-                    // 추가된 부분: 오류 메시지 표시
+           
                     errorText: _phoneError,
                   ),
                   keyboardType: TextInputType.phone,
@@ -236,7 +236,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         });
                       },
                     ),
-                    // 추가된 부분: 오류 메시지 표시
+        
                     errorText: _passwordError,
                   ),
                   obscureText: !_isPasswordVisible,

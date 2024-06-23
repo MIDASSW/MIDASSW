@@ -22,10 +22,10 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
     final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
 
     if (response.statusCode == 200) {
-      final List<dynamic> crackData = json.decode(response.body).take(10).toList(); // 상위 10개 데이터만 사용
+      final List<dynamic> crackData = json.decode(response.body).take(10).toList(); 
       setState(() {
         cracks = crackData.map((data) => Crack.fromJson(data)).toList();
-        cracks.sort((a, b) => DateTime.parse(b.timestamp).compareTo(DateTime.parse(a.timestamp))); // 최근 일시 순으로 정렬
+        cracks.sort((a, b) => DateTime.parse(b.timestamp).compareTo(DateTime.parse(a.timestamp))); 
         isLoading = false;
       });
     } else {
@@ -35,7 +35,7 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
 
   String formatDate(String dateTime) {
     DateTime dt = DateTime.parse(dateTime);
-    return DateFormat('yyyy-MM-dd').format(dt); // 시간 없이 날짜만 반환
+    return DateFormat('yyyy-MM-dd').format(dt); 
   }
 
   @override
@@ -59,7 +59,7 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
         ),
         automaticallyImplyLeading: false,
         leadingWidth: 40,
-        elevation: 0, // 스크롤 시 앱바의 그림자를 없앰
+        elevation: 0,
       ),
       body: Column(
         children: [
@@ -68,17 +68,17 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
                 ? Center(child: CircularProgressIndicator())
                 : ListView.separated(
                     itemCount: cracks.length,
-                    separatorBuilder: (context, index) => Divider(color: Colors.grey.shade300), // 더 연한 항목 구분선
+                    separatorBuilder: (context, index) => Divider(color: Colors.grey.shade300), 
                     itemBuilder: (context, index) {
                       final crack = cracks[index];
                       return ListTile(
                         title: Row(
                           children: [
                             SizedBox(
-                              width: 24, // 숫자의 너비를 고정
+                              width: 24, 
                               child: Text(
                                 '${index + 1}',
-                                style: TextStyle(fontWeight: FontWeight.bold), // 숫자를 볼드체로 표시
+                                style: TextStyle(fontWeight: FontWeight.bold), 
                               ),
                             ),
                             SizedBox(width: 10),
@@ -87,7 +87,7 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
                               width: 50,
                               height: 50,
                             ),
-                            SizedBox(width: 10), // 간격 추가
+                            SizedBox(width: 10), 
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +96,7 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
                                     children: [
                                       Text(
                                         '일시: ',
-                                        style: TextStyle(fontWeight: FontWeight.bold), // "일시"를 볼드체로 표시
+                                        style: TextStyle(fontWeight: FontWeight.bold), 
                                       ),
                                       Expanded(
                                         child: Text(
@@ -110,7 +110,7 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
                                     children: [
                                       Text(
                                         '위치: ',
-                                        style: TextStyle(fontWeight: FontWeight.bold), // "위치"를 볼드체로 표시
+                                        style: TextStyle(fontWeight: FontWeight.bold),
                                       ),
                                       Expanded(
                                         child: Text(
@@ -151,7 +151,7 @@ class Crack {
   factory Crack.fromJson(Map<String, dynamic> json) {
     return Crack(
       imageUrl: json['url'],
-      timestamp: DateTime.now().toString(), // 실제 데이터가 있다면 여기에 적절한 값을 사용해야 합니다.
+      timestamp: DateTime.now().toString(), 
       title: json['title'],
       distance: (json['id'] % 10).toDouble(),
     );

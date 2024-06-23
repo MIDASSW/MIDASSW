@@ -29,7 +29,7 @@ void _showPasswordChangedDialog() {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor: Colors.white, // 배경색을 흰색으로 설정
+        backgroundColor: Colors.white,
         content: Text('비밀번호가 변경되었습니다.', style: TextStyle(fontSize: 18)),
         actions: <Widget>[
           TextButton(

@@ -85,8 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black, // 선택된 아이템 색상
-        unselectedItemColor: Colors.grey, // 선택되지 않은 아이템 색상
+        selectedItemColor: Colors.black, 
+        unselectedItemColor: Colors.grey, 
         onTap: _onItemTapped,
       ),
     );

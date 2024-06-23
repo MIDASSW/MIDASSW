@@ -22,10 +22,10 @@ class _NearbyCrackListPageState extends State<NearbyCrackListPage> {
     final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
 
     if (response.statusCode == 200) {
-      final List<dynamic> crackData = json.decode(response.body).take(10).toList(); // 상위 10개 데이터만 사용
+      final List<dynamic> crackData = json.decode(response.body).take(10).toList();
       setState(() {
         cracks = crackData.map((data) => Crack.fromJson(data)).toList();
-        cracks.sort((a, b) => a.distance.compareTo(b.distance)); // 내 위치와 가까운 순으로 정렬
+        cracks.sort((a, b) => a.distance.compareTo(b.distance));
         isLoading = false;
       });
     } else {
@@ -35,7 +35,7 @@ class _NearbyCrackListPageState extends State<NearbyCrackListPage> {
 
   String formatDate(String dateTime) {
     DateTime dt = DateTime.parse(dateTime);
-    return DateFormat('yyyy-MM-dd').format(dt); // 시간 없이 날짜만 반환
+    return DateFormat('yyyy-MM-dd').format(dt);
   }
 
   @override
@@ -58,9 +58,9 @@ class _NearbyCrackListPageState extends State<NearbyCrackListPage> {
           ),
         ),
         automaticallyImplyLeading: false,
-        elevation: 0, // 스크롤 시 앱바의 그림자를 없앰
+        elevation: 0,
       ),
-      resizeToAvoidBottomInset: false, // 키보드가 올라올 때 화면 크기 조정 안 함
+      resizeToAvoidBottomInset: false, 
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -153,9 +153,9 @@ class Crack {
   factory Crack.fromJson(Map<String, dynamic> json) {
     return Crack(
       imageUrl: json['url'],
-      timestamp: DateTime.now().toString(), // 실제 데이터가 있다면 여기에 적절한 값을 사용해야 합니다.
+      timestamp: DateTime.now().toString(), 
       title: json['title'],
-      distance: (json['id'] % 10).toDouble(), // 임의의 거리 값 설정
+      distance: (json['id'] % 10).toDouble(), 
     );
   }
 }

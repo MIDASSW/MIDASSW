@@ -35,7 +35,7 @@ class _ReportPageState extends State<ReportPage> {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: Colors.grey,
               onPrimary: Colors.white,
               surface: Colors.white,
@@ -66,21 +66,27 @@ class _ReportPageState extends State<ReportPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white,
           title: Text('사진 선택'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              ListTile(
-                leading: Icon(Icons.photo_camera),
-                title: Text('사진 찍기'),
-                onTap: () {
-                  _pickImage(ImageSource.camera);
-                  Navigator.of(context).pop();
-                },
-              ),
+        ListTile(
+         leading: const Icon(Icons.photo_camera),
+         title: Text(
+        '사진 찍기',
+         style: TextStyle(color: Colors.black), // 텍스트 색상을 검정색으로 설정
+           ),
+       onTap: () {
+     _pickImage(ImageSource.camera);
+    Navigator.of(context).pop();
+      },
+    ),
+
               ListTile(
                 leading: Icon(Icons.photo_library),
-                title: Text('사진 불러오기'),
+                title: Text('사진 불러오기', style: TextStyle(color: Colors.black), ),
+                
                 onTap: () {
                   _pickImage(ImageSource.gallery);
                   Navigator.of(context).pop();
@@ -93,7 +99,7 @@ class _ReportPageState extends State<ReportPage> {
     );
   }
 
-  // 이미지 선택 메서드
+
   Future<void> _pickImage(ImageSource source) async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: source);
@@ -107,7 +113,7 @@ class _ReportPageState extends State<ReportPage> {
     }
   }
 
-  // 위치 정보 가져오기 메서드
+
   Future<void> _locateMe() async {
     _serviceEnabled = await location.serviceEnabled();
     if (!_serviceEnabled) {
@@ -133,7 +139,7 @@ class _ReportPageState extends State<ReportPage> {
         });
       }
 
-      final apiKey = dotenv.env['appKey']; // .env 파일에서 API 키 가져오기
+      final apiKey = dotenv.env['appKey']; 
       final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=$apiKey';
 
       final response = await http.get(Uri.parse(url));
@@ -156,10 +162,10 @@ class _ReportPageState extends State<ReportPage> {
     });
   }
 
-  // 데이터를 서버로 전송하는 메서드
+
   Future<void> sendData() async {
     if (_image == null || _selectedDate == null || address.isEmpty) {
-      // 모든 필드가 채워져 있는지 확인합니다.
+    
       return;
     }
 
@@ -196,7 +202,7 @@ class _ReportPageState extends State<ReportPage> {
             children: <Widget>[
               SizedBox(height: 20),
               GestureDetector(
-                onTap: _showImagePickerDialog, // 이미지 선택 다이얼로그 표시
+                onTap: _showImagePickerDialog,
                 child: _image == null
                     ? Container(
                         width: 200,
@@ -228,7 +234,7 @@ class _ReportPageState extends State<ReportPage> {
                 child: Stack(
                   alignment: Alignment.topRight,
                   children: <Widget>[
-                    TextField( // 날짜 입력 필드
+                    TextField( 
                       decoration: InputDecoration(
                         labelText: '날짜',
                         labelStyle: TextStyle(color: Colors.grey),
@@ -250,7 +256,7 @@ class _ReportPageState extends State<ReportPage> {
                     ),
                     IconButton(
                       icon: Icon(Icons.date_range, color: Colors.grey),
-                      onPressed: () => _selectDate(context), // 날짜 선택 다이얼로그 표시
+                      onPressed: () => _selectDate(context),
                     ),
                   ],
                 ),
@@ -261,7 +267,7 @@ class _ReportPageState extends State<ReportPage> {
                 child: Stack(
                   alignment: Alignment.topRight,
                   children: <Widget>[
-                    TextField( // 위치 입력 필드
+                    TextField( 
                       decoration: InputDecoration(
                         labelText: '위치',
                         labelStyle: TextStyle(color: Colors.grey),
@@ -280,7 +286,7 @@ class _ReportPageState extends State<ReportPage> {
                     IconButton(
                       icon: Icon(Icons.location_on, color: Colors.grey),
                       onPressed: () async {
-                        await _locateMe(); // 위치 정보 가져오기
+                        await _locateMe();
                       },
                     ),
                   ],
@@ -289,7 +295,7 @@ class _ReportPageState extends State<ReportPage> {
               SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () {
-                  sendData(); // 서버로 데이터 전송
+                  sendData(); 
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(

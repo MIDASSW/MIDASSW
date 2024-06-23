@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crackdetectcamera/SplashPage.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'LoginPage.dart';
 
 void main() async {
-  await dotenv.load(fileName: ".env");
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+   await dotenv.load(fileName: ".env");
+   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+   FlutterNativeSplash.remove();
   runApp(const MyApp());
 }
 
@@ -18,11 +20,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        '/': (context) => const SplashPage(),
-        '/home': (context) => const LoginPage(),
-      },
+    return  MaterialApp(
+      home: LoginPage(), 
     );
   }
 }
+
