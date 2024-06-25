@@ -13,7 +13,7 @@
 
    * GPU 사용할 시
   
-     python train.py --img 640 --batch 16 --epochs 30 --data data/data.yaml --cfg models/yolov5s.yaml --weights weights/yolov5s.pt  --device 1,2
+     python train.py --img 640 --batch 16 --epochs 30 --data data/data.yaml --cfg models/yolov5s.yaml --weights weights/yolov5s.pt  --device 1,2(CUDA 필요, 자신의 GPU 번호에 따라 변화)
 
 3. 돌린 후 결과는 디렉토리 runs/train/exp마지막번호 에 존재한다.
   
@@ -22,5 +22,6 @@
    python detect.py 명령어 입력
 
    python detect.py --source ./inference/images/test.jpg --weights runs/train/exp22/weights/best.pt --conf 0.4
+   (source는 자신이 탐지시킬 이미지의 경로, weight는 자신이 학습시킨 모델의 best.pt의 경로를 적으면 된다)
 
    사진의 저장 디렉토리는 runs/detect/exp숫자 폴더에 저장
