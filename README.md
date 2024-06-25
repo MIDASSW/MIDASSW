@@ -26,7 +26,7 @@
 
 **4. 로컬 웹 설치 및 실행방법(window 기준)**
 * Node.js 공식 웹사이트에서 Windows용 인스톨러를 다운로드(https://nodejs.org/en)
-* vscode에 ApptoWeb로 이동한후, pull 받기
+* vscode에 ApptoWeb으로 이동한후, pull 받기
 * npm install express multer 패키지 설치
 * node app.js를 실행하여 로컬 웹 실행
 
