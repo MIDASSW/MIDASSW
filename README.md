@@ -157,3 +157,50 @@
   5. Google Cloud Storage
 
     * 크랙 이미지, 날짜, 위치 저장
+
+**8. 라즈베리파이(publisher)**
+
+1. 필요 라이브러리 설치(mqtt, cv2, picamera2)
+
+    pip install paho-mqtt
+
+    pip install opencv-python
+
+    sudo apt install -y python3 -picamera2
+
+2. 라즈베리파이 카메라 포트 활성화
+
+    sudo raspi-config
+
+    camera 선택
+
+    yes 선택
+
+3. pc에 mosquitto 설치
+
+    * 모스키토 홈페이지(https://mosquitto.org/download/)에서 설치 파일 다운로드
+  
+    * 고급 시스템 설정-환경변수-path 편집-mosquitto 설치 경로 등록
+  
+    * 실행방법
+
+        1. 명령 프롬프트 실행 후 mosquitto-v 명령어 입력을 통해 mosquitto 실행
+     
+        2. python subscriber.py 명령어 입력을 통해 subscriber 실행
+     
+        3. 라즈베리파이에서 python publisher.py 명령어 입력을 통해 publisher 실행
+     
+           * publisher.py 파일은 라즈베리파이에서 동작합니다.
+
+           * 현재 로컬 통신만 가능한 상태입니다.
+          
+           * gps 모듈을 연결하였으나 gps값이 출력되지 않는 오류가 있어 코드 상에서 임의의 gps값으로 대체된 상태입니다.
+          
+           * 추후 학습모델 적용하여 스마트폰과 웹서버를 subscriber로 두고 크랙 감지 시 상응하는 동작을 수행하도록 할 예정입니다.
+
+
+
+
+
+
+   
