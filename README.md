@@ -186,9 +186,9 @@
 
         1. 명령 프롬프트 실행 후 mosquitto-v 명령어 입력을 통해 mosquitto 실행
      
-        2. python subscriber.py 명령어 입력을 통해 subscriber 실행
+        2. 다른 명령 프롬프트에서 python subscriber.py 명령어 입력을 통해 subscriber 실행
      
-        3. 라즈베리파이에서 python publisher.py 명령어 입력을 통해 publisher 실행
+        3. 라즈베리파이 터미널에서 python publisher.py 명령어 입력을 통해 publisher 실행
      
            * publisher.py 파일은 라즈베리파이에서 동작합니다.
 
