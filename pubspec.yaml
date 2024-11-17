@@ -79,9 +79,11 @@ flutter:
   assets:
     - assets/audio/alarm_warning.mp3
     - assets/image/apple.png
+    - assets/image/doro2.png
     - assets/image/google.png
     - assets/image/kakao.png
     - assets/image/logo.png
+    
 
     - .env # path to your .env file
   #   - images/a_dot_ham.jpeg

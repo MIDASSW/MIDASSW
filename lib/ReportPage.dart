@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ReportPage extends StatefulWidget {
+  const ReportPage({super.key});
+
   @override
   _ReportPageState createState() => _ReportPageState();
 }
@@ -67,13 +69,13 @@ class _ReportPageState extends State<ReportPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          title: Text('사진 선택'),
+          title: const Text('사진 선택'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
         ListTile(
          leading: const Icon(Icons.photo_camera),
-         title: Text(
+         title: const Text(
         '사진 찍기',
          style: TextStyle(color: Colors.black), // 텍스트 색상을 검정색으로 설정
            ),
@@ -84,8 +86,8 @@ class _ReportPageState extends State<ReportPage> {
     ),
 
               ListTile(
-                leading: Icon(Icons.photo_library),
-                title: Text('사진 불러오기', style: TextStyle(color: Colors.black), ),
+                leading: const Icon(Icons.photo_library),
+                title: const Text('사진 불러오기', style: TextStyle(color: Colors.black), ),
                 
                 onTap: () {
                   _pickImage(ImageSource.gallery);
@@ -151,8 +153,9 @@ class _ReportPageState extends State<ReportPage> {
             address = formattedAddress;
             _locationController.text = address;
           });
-        };
-      } else {
+        }
+      }
+      else {
         if (mounted) {
           setState(() {
             address = 'Failed to fetch address';
@@ -185,137 +188,215 @@ class _ReportPageState extends State<ReportPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '제보하기',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        elevation: 0,
-      ),
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(height: 20),
-              GestureDetector(
-                onTap: _showImagePickerDialog,
-                child: _image == null
-                    ? Container(
-                        width: 200,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: Colors.grey[400]!),
-                        ),
-                        child: Icon(
-                          Icons.add_photo_alternate,
-                          size: 100,
-                          color: Colors.grey,
-                        ),
-                      )
-                    : ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.file(
-                          _image!,
-                          width: 200,
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-              ),
-              SizedBox(height: 20),
-              Container(
-                width: 300,
-                child: Stack(
-                  alignment: Alignment.topRight,
-                  children: <Widget>[
-                    TextField( 
-                      decoration: InputDecoration(
-                        labelText: '날짜',
-                        labelStyle: TextStyle(color: Colors.grey),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                      ),
-                      controller: TextEditingController(
-                        text: _selectedDate != null
-                            ? '${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}'
-                            : '',
-                      ),
-                      readOnly: true,
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.date_range, color: Colors.grey),
-                      onPressed: () => _selectDate(context),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20),
-              Container(
-                width: 300,
-                child: Stack(
-                  alignment: Alignment.topRight,
-                  children: <Widget>[
-                    TextField( 
-                      decoration: InputDecoration(
-                        labelText: '위치',
-                        labelStyle: TextStyle(color: Colors.grey),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                      ),
-                      controller: _locationController,
-                      readOnly: true,
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.location_on, color: Colors.grey),
-                      onPressed: () async {
-                        await _locateMe();
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 50),
-              ElevatedButton(
-                onPressed: () {
-                  sendData(); 
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color.fromARGB(255, 196, 196, 196),
-                  ),
-                  fixedSize: MaterialStateProperty.all<Size>(
-                    const Size(160, 50),
-                  ),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                ),
-                child: const Text('전송하기', style: TextStyle(color: Colors.white, fontSize: 16)),
-              ),
-            ],
+  backgroundColor: const Color.fromARGB(255, 233, 233, 233),
+  appBar: PreferredSize(
+  preferredSize: Size.fromHeight(100),
+child: AppBar(
+  backgroundColor: const Color.fromARGB(255, 233, 233, 233),
+  foregroundColor: Colors.black, // AppBar 텍스트 색상을 검정으로 설정
+  automaticallyImplyLeading: false,
+  elevation: 0,
+  title: null, // 기본 title을 null로 설정하여 flexibleSpace에만 텍스트를 배치하도록 함
+  flexibleSpace: Column(
+    mainAxisAlignment: MainAxisAlignment.center, // Column 내부의 위젯들을 세로로 중앙 정렬
+    crossAxisAlignment: CrossAxisAlignment.start, // 텍스트를 왼쪽 정렬
+    children: [
+      Padding(
+        padding: const EdgeInsets.only(left: 16.0), // 왼쪽 여백을 설정
+        child: Text(
+          '제보 하기', // 첫 번째 텍스트
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
           ),
         ),
       ),
+      Padding(
+        padding: const EdgeInsets.only(left: 16.0, top: 8.0), // 두 번째 텍스트를 첫 번째 텍스트 아래에 배치
+        child: Text(
+          '주변에서 발생된 크랙을 제보해보세요!', // 두 번째 텍스트
+          style: TextStyle(
+            fontSize: 14, // 텍스트 크기
+            color: Colors.black, // 텍스트 색상 설정
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+  ),
+  body: ClipRRect(
+  borderRadius: const BorderRadius.only(
+    topLeft: Radius.circular(30), // 왼쪽 상단 모서리 둥글게
+    topRight: Radius.circular(30), // 오른쪽 상단 모서리 둥글게
+  ),
+  child: Container(
+    color: const Color.fromARGB(255, 255, 255, 255), // ClipRRect 내부의 배경색 설정
+    height: double.infinity, // 높이를 화면 전체로 확장
+    child: SingleChildScrollView(
+      child: Center(
+        child: Column(
+           mainAxisAlignment: MainAxisAlignment.center, // 자식이 화면 전체 너비를 차지하도록 설정
+          children: <Widget>[
+            const SizedBox(height: 20),
+            GestureDetector(
+              onTap: _showImagePickerDialog,
+              child: _image == null? 
+              Container(
+  width: 250,
+  height: 200,
+  decoration: BoxDecoration(
+    color: Colors.grey[200],
+    borderRadius: BorderRadius.circular(15),
+    border: Border.all(color: Colors.grey[400]!),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.5), // 그림자 색상 및 투명도
+        spreadRadius: 2, // 그림자 퍼지는 정도
+        blurRadius: 5,   // 그림자 흐림 정도
+        offset: Offset(0, 3), // 그림자의 위치 (x, y)
+      ),
+    ],
+  ),
+  child: Stack(
+    children: [
+      // 중앙의 이미지 아이콘
+      Center(
+        child: const ImageIcon(
+          AssetImage('assets/image/doro2.png'),
+          size: 200,
+        ),
+      ),
+      // 오른쪽 아래의 + 아이콘
+      Positioned(
+        bottom: 10, // 아래쪽 여백
+        right: 10,  // 오른쪽 여백
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white, // 아이콘 배경색
+            shape: BoxShape.circle, // 원형 배경
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 5,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          child: IconButton(
+            icon: Icon(Icons.add),
+            color: Colors.black,
+            iconSize: 20,
+            onPressed: () {
+            },
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.file(
+                        _image!,
+                        width: 200,
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+            ),
+            const SizedBox(height: 50),
+            SizedBox(
+              width: 300,
+              child: Stack(
+                alignment: Alignment.topRight,
+                children: <Widget>[
+                  TextField( 
+                    decoration: InputDecoration(
+                      labelText: '날짜',
+                      labelStyle: const TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25),
+                        borderSide: const BorderSide(color: Colors.grey),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25),
+                        borderSide: const BorderSide(color: Colors.grey),
+                      ),
+                    ),
+                    controller: TextEditingController(
+                      text: _selectedDate != null
+                          ? '${_selectedDate!.year}-${_selectedDate!.month}-${_selectedDate!.day}'
+                          : '',
+                    ),
+                    readOnly: true,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.date_range, color: Color.fromARGB(255, 83, 83, 83)),
+                    onPressed: () => _selectDate(context),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 300,
+              child: Stack(
+                alignment: Alignment.topRight,
+                children: <Widget>[
+                  TextField( 
+                    decoration: InputDecoration(
+                      labelText: '위치',
+                      labelStyle: const TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25),
+                        borderSide: const BorderSide(color: Colors.grey),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25),
+                        borderSide: const BorderSide(color: Colors.grey),
+                      ),
+                    ),
+                    controller: _locationController,
+                    readOnly: true,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.location_on, color: Color.fromARGB(255, 83, 83, 83)),
+                    onPressed: () async {
+                      await _locateMe();
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 50),
+            ElevatedButton(
+              onPressed: () {
+                sendData(); 
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  const Color.fromARGB(255, 39, 39, 39),
+                ),
+                fixedSize: MaterialStateProperty.all<Size>(
+                  const Size(160, 50),
+                ),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                ),
+              ),
+              child: const Text('전송하기', style: TextStyle(color: Colors.white, fontSize: 16)),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+),
+
     );
   }
 }

@@ -5,6 +5,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_crackdetectcamera/PasswordChangePage.dart';
 
 class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
+
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -88,17 +90,17 @@ void _logout() {
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: Colors.white,
-        title: Text('로그아웃'),
-        content: Text('정말 로그아웃하시겠습니까?'),
+        title: const Text('로그아웃'),
+        content: const Text('정말 로그아웃하시겠습니까?'),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(); 
             },
-            child: Text('취소'),
             style: TextButton.styleFrom(
               foregroundColor: Colors.black, 
             ),
+            child: const Text('취소'),
           ),
           TextButton(
             onPressed: () {
@@ -113,10 +115,10 @@ void _logout() {
                 (Route<dynamic> route) => false,
               );
             },
-            child: Text('확인'),
             style: TextButton.styleFrom(
               foregroundColor: Colors.black, 
             ),
+            child: const Text('확인'),
           ),
         ],
       );
@@ -129,7 +131,7 @@ void _logout() {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           '설정',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -144,9 +146,9 @@ void _logout() {
             children: [
               Container(
                 width: 300,
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Color(0xFFefefef),
+                  color: const Color(0xFFefefef),
                   borderRadius: BorderRadius.circular(15), 
                 ),
                 child: Column(
@@ -155,7 +157,7 @@ void _logout() {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "직접 알림",
                           style: TextStyle(fontSize: 16),
                         ),
@@ -170,8 +172,8 @@ void _logout() {
                         ),
                       ],
                     ),
-                    SizedBox(height: 8), 
-                    Text(
+                    const SizedBox(height: 8), 
+                    const Text(
                       "50~200m내에 크랙이 감지될때, 알림 소리가 나요.",
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                       textAlign: TextAlign.center,
@@ -179,7 +181,7 @@ void _logout() {
                   ],
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               IgnorePointer(
                 ignoring: !_firstToggle,
                 child: GestureDetector(
@@ -212,14 +214,14 @@ void _logout() {
                       width: 300,
                       height: 80,
                       decoration: BoxDecoration(
-                        color: Color(0xFFefefef), 
+                        color: const Color(0xFFefefef), 
                         borderRadius: BorderRadius.circular(15), 
                       ),
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             '알림 크기 설정',
                             style: TextStyle(fontSize: 16, color: Colors.black),
                           ),
@@ -247,7 +249,7 @@ void _logout() {
                                     );
                                   }
                                 : null,
-                            icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
+                            icon: const Icon(Icons.arrow_forward_ios, color: Colors.black),
                           ),
                         ],
                       ),
@@ -255,12 +257,12 @@ void _logout() {
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Container(
                 width: 300,
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Color(0xFFefefef), 
+                  color: const Color(0xFFefefef), 
                   borderRadius: BorderRadius.circular(15), 
                 ),
                 child: Column(
@@ -269,7 +271,7 @@ void _logout() {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "푸시알림",
                           style: TextStyle(fontSize: 16),
                         ),
@@ -284,8 +286,8 @@ void _logout() {
                         ),
                       ],
                     ),
-                    SizedBox(height: 8), // 텍스트와 토글 간격
-                    Text(
+                    const SizedBox(height: 8), // 텍스트와 토글 간격
+                    const Text(
                       "1km내에 크랙이 감지 될 때, 푸시알림을 보내요.",
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                       textAlign: TextAlign.center,
@@ -293,19 +295,19 @@ void _logout() {
                   ],
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Container(
                 width: 300,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: Color(0xFFefefef),
+                  color: const Color(0xFFefefef),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       '비밀번호 변경',
                       style: TextStyle(fontSize: 16, color: Colors.black),
                     ),
@@ -314,33 +316,33 @@ void _logout() {
                         print('비밀번호변경 클릭됨');
                        
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => PasswordChangePage(),
+                          builder: (context) => const PasswordChangePage(),
                         ));
                       },
-                      icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
+                      icon: const Icon(Icons.arrow_forward_ios, color: Colors.black),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Container(
                 width: 300,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: Color(0xFFefefef), 
+                  color: const Color(0xFFefefef), 
                   borderRadius: BorderRadius.circular(15), 
                 ),
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       '로그아웃',
                       style: TextStyle(fontSize: 16, color: Colors.black),
                     ),
                     IconButton(
                       onPressed: _logout,
-                      icon: Icon(Icons.arrow_forward_ios, color: Colors.black),
+                      icon: const Icon(Icons.arrow_forward_ios, color: Colors.black),
                     ),
                   ],
                 ),
@@ -360,7 +362,7 @@ class SoundLevelDialog extends StatefulWidget {
   final VoidCallback playSound;
   final VoidCallback stopSound; 
 
-  SoundLevelDialog({
+  const SoundLevelDialog({super.key, 
     required this.volume,
     required this.onVolumeChanged,
     required this.playSound,
@@ -384,13 +386,13 @@ class _SoundLevelDialogState extends State<SoundLevelDialog> {
 Widget build(BuildContext context) {
   return AlertDialog(
     backgroundColor: Colors.white, 
-    title: Text('알림 소리 크기 설정'),
+    title: const Text('알림 소리 크기 설정'),
     content: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           'Volume: ${(_currentVolume * 100).round()}%',
-          style: TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20),
         ),
         Slider(
           value: _currentVolume,
@@ -417,10 +419,10 @@ Widget build(BuildContext context) {
           widget.stopSound(); 
           Navigator.of(context).pop();
         },
-        child: Text('닫기'),
           style: TextButton.styleFrom(
     foregroundColor: Colors.black, 
   ),
+        child: const Text('닫기'),
       ),
     ],
   );

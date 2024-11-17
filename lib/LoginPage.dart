@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CRACKHOLE'),
+        title: const Text('CRACKHOLE', style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold,color: Colors.black,), ),
         backgroundColor: Colors.white,
       ),
       backgroundColor: Colors.white,
@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                   else {
                 
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => MyApp()),
+                      MaterialPageRoute(builder: (context) => const MyApp()),
                     );
                   }
 
@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ForgotPasswordPage()),
+                              builder: (context) => const ForgotPasswordPage()),
                         );
                       },
                       style: TextButton.styleFrom(
@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  RegisterPage()),
+                              builder: (context) =>  const RegisterPage()),
                         );
                       },
                       style: TextButton.styleFrom(
@@ -160,23 +160,12 @@ class _LoginPageState extends State<LoginPage> {
                     Expanded(
                       child: Divider(
                         color: Colors.grey,
-                        thickness: 1,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text("또는"),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        color: Colors.grey,
-                        thickness: 1,
+                        thickness: 3,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20), 
-               
+                const SizedBox(height: 40), 
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16.0), 
@@ -306,7 +295,7 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('다시 입력하세요.'),
+        title: const Text('다시 입력하세요.'),
         content: Text(message),
         backgroundColor: Colors.white,
         actions: <Widget>[
@@ -314,10 +303,10 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('확인'),
             style: TextButton.styleFrom(
               foregroundColor: Colors.black,
             ),
+            child: const Text('확인'),
           ),
         ],
       ),

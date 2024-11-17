@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 
 class NearbyCrackListPage extends StatefulWidget {
+  const NearbyCrackListPage({super.key});
+
   @override
   _NearbyCrackListPageState createState() => _NearbyCrackListPageState();
 }
@@ -46,17 +48,19 @@ class _NearbyCrackListPageState extends State<NearbyCrackListPage> {
         backgroundColor: const Color(0xffffffff),
         foregroundColor: Colors.black,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
-        title: Center(
-          child: Text(
-            '내 주변 크랙',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-          ),
-        ),
+         title: const Text(
+    '내 주변 크랙',
+    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+  ),
+  centerTitle: true,
+
+
+
         automaticallyImplyLeading: false,
         elevation: 0,
       ),
@@ -65,10 +69,10 @@ class _NearbyCrackListPageState extends State<NearbyCrackListPage> {
         child: Column(
           children: [
             isLoading
-                ? Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator())
                 : ListView.separated(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: cracks.length,
                     separatorBuilder: (context, index) => Divider(color: Colors.grey.shade300),
                     itemBuilder: (context, index) {
@@ -80,29 +84,29 @@ class _NearbyCrackListPageState extends State<NearbyCrackListPage> {
                               width: 24,
                               child: Text(
                                 '${index + 1}',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Image.network(
                               crack.imageUrl,
                               width: 50,
                               height: 50,
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     children: [
-                                      Text(
+                                      const Text(
                                         '일시: ',
                                         style: TextStyle(fontWeight: FontWeight.bold),
                                       ),
                                       Expanded(
                                         child: Text(
-                                          '${formatDate(crack.timestamp)}',
+                                          formatDate(crack.timestamp),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
@@ -110,13 +114,13 @@ class _NearbyCrackListPageState extends State<NearbyCrackListPage> {
                                   ),
                                   Row(
                                     children: [
-                                      Text(
+                                      const Text(
                                         '위치: ',
                                         style: TextStyle(fontWeight: FontWeight.bold),
                                       ),
                                       Expanded(
                                         child: Text(
-                                          '${crack.title}',
+                                          crack.title,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),

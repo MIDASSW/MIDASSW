@@ -6,6 +6,8 @@ import 'package:flutter_crackdetectcamera/RecentCrackListPage.dart';
 import 'package:flutter_crackdetectcamera/NearbyCrackListPage.dart';
 
 class MyNearbyPage extends StatefulWidget {
+  const MyNearbyPage({super.key});
+
   @override
   _MyNearbyPageState createState() => _MyNearbyPageState();
 }
@@ -54,28 +56,73 @@ class _MyNearbyPageState extends State<MyNearbyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: const Color(0xffffffff),
-        foregroundColor: Colors.black,
-        automaticallyImplyLeading: false,
-        elevation: 0, 
+  backgroundColor: const Color.fromARGB(255, 255, 255, 255), // Scaffold의 전체 배경을 흰색으로 설정
+  appBar: PreferredSize(
+  preferredSize: Size.fromHeight(100),
+child: AppBar(
+  backgroundColor: Colors.white,
+  foregroundColor: Colors.black, // AppBar 텍스트 색상을 검정으로 설정
+  automaticallyImplyLeading: false,
+  elevation: 0,
+  title: null, // 기본 title을 null로 설정하여 flexibleSpace에만 텍스트를 배치하도록 함
+  flexibleSpace: Column(
+    mainAxisAlignment: MainAxisAlignment.center, // Column 내부의 위젯들을 세로로 중앙 정렬
+    crossAxisAlignment: CrossAxisAlignment.start, // 텍스트를 왼쪽 정렬
+    children: [
+      Padding(
+        padding: const EdgeInsets.only(left: 16.0), // 왼쪽 여백을 설정
+        child: Text(
+          '내 주변', // 첫 번째 텍스트
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
       ),
-      body: Column(
+      Padding(
+        padding: const EdgeInsets.only(left: 16.0, top: 8.0), // 두 번째 텍스트를 첫 번째 텍스트 아래에 배치
+        child: Text(
+          '최근 발생한 크랙과 내 주변 크랙을 확인해보세요!', // 두 번째 텍스트
+          style: TextStyle(
+            fontSize: 14, // 텍스트 크기
+            color: Colors.black, // 텍스트 색상 설정
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+
+
+  ),
+
+  body: ClipRRect(
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(30), // 왼쪽 상단 모서리 둥글게
+      topRight: Radius.circular(30), // 오른쪽 상단 모서리 둥글게
+    ),
+    child: Container(
+      color: const Color.fromARGB(255, 233, 233, 233), // body 부분의 배경색을 회색으로 설정
+      child:SingleChildScrollView(
+              child: Column(
         children: [
+          SizedBox(
+            height:25,
+          ),
           ListTile(
-            title: Text('최근 크랙', style: TextStyle(fontWeight: FontWeight.bold)),
-            trailing: Icon(Icons.arrow_forward_ios),
+            title: const Text('최근 크랙', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87)),
+            trailing: const Icon(Icons.arrow_forward_ios, color: Colors.black87),
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => RecentCrackListPage()),
+                MaterialPageRoute(builder: (context) => const RecentCrackListPage()),
               );
             },
           ),
           SizedBox(
             height: 200,
             child: isLoading
-                ? Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator(color: Colors.white))
                 : ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: cracks.length,
@@ -83,7 +130,7 @@ class _MyNearbyPageState extends State<MyNearbyPage> {
                       final crack = cracks[index];
                       return Container(
                         width: 150,
-                        margin: EdgeInsets.all(8.0),
+                        margin: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -93,14 +140,15 @@ class _MyNearbyPageState extends State<MyNearbyPage> {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Text(
                               '일시: ${formatDate(crack.timestamp)}',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: const TextStyle(color: Colors.black87),
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
                               '위치: ${crack.title}',
+                              style: const TextStyle(color: Colors.black87),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ],
@@ -110,18 +158,18 @@ class _MyNearbyPageState extends State<MyNearbyPage> {
                   ),
           ),
           ListTile(
-            title: Text('내 주변 크랙', style: TextStyle(fontWeight: FontWeight.bold)),
-            trailing: Icon(Icons.arrow_forward_ios),
+            title: const Text('내 주변 크랙', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87)),
+            trailing: const Icon(Icons.arrow_forward_ios, color: Colors.black87),
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => NearbyCrackListPage()),
+                MaterialPageRoute(builder: (context) => const NearbyCrackListPage()),
               );
             },
           ),
           SizedBox(
             height: 200,
             child: isLoading
-                ? Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator(color: Colors.white))
                 : ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: cracks.length,
@@ -129,7 +177,7 @@ class _MyNearbyPageState extends State<MyNearbyPage> {
                       final crack = cracks[index];
                       return Container(
                         width: 150,
-                        margin: EdgeInsets.all(8.0),
+                        margin: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -139,14 +187,15 @@ class _MyNearbyPageState extends State<MyNearbyPage> {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Text(
                               '일시: ${formatDate(crack.timestamp)}',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: const TextStyle(color: Colors.black87),
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
                               '위치: ${crack.title}',
+                              style: const TextStyle(color: Colors.black87),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ],
@@ -157,7 +206,11 @@ class _MyNearbyPageState extends State<MyNearbyPage> {
           ),
         ],
       ),
-    );
+      )
+
+    ),
+  ),
+);
   }
 }
 

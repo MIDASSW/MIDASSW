@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crackdetectcamera/MyrewardPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'ReportPage.dart';
@@ -8,7 +9,7 @@ import 'LocationPage.dart';
 
 class MyApp extends StatelessWidget {
 
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-     LocationPage(),
-     MyNearbyPage(),
-     ReportPage(),
-     SettingsPage(),
+    const LocationPage(),
+    const MyNearbyPage(),
+    const MyRewardPage(),
+    const ReportPage(),
+    const SettingsPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -74,6 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.location_on),
             label: '내 주변',
+          ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.money),
+            label: '내 보상',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 
 class RecentCrackListPage extends StatefulWidget {
+  const RecentCrackListPage({super.key});
+
   @override
   _RecentCrackListPageState createState() => _RecentCrackListPageState();
 }
@@ -46,17 +48,16 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
         backgroundColor: const Color(0xffffffff),
         foregroundColor: Colors.black,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
-        title: Center(
-          child: Text(
-            '최근 크랙',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-          ),
-        ),
+  title: const Text(
+    '최근 크랙',
+    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+  ),
+  centerTitle: true,
         automaticallyImplyLeading: false,
         leadingWidth: 40,
         elevation: 0,
@@ -65,7 +66,7 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
         children: [
           Expanded(
             child: isLoading
-                ? Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator())
                 : ListView.separated(
                     itemCount: cracks.length,
                     separatorBuilder: (context, index) => Divider(color: Colors.grey.shade300), 
@@ -78,29 +79,29 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
                               width: 24, 
                               child: Text(
                                 '${index + 1}',
-                                style: TextStyle(fontWeight: FontWeight.bold), 
+                                style: const TextStyle(fontWeight: FontWeight.bold), 
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Image.network(
                               crack.imageUrl,
                               width: 50,
                               height: 50,
                             ),
-                            SizedBox(width: 10), 
+                            const SizedBox(width: 10), 
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     children: [
-                                      Text(
+                                      const Text(
                                         '일시: ',
                                         style: TextStyle(fontWeight: FontWeight.bold), 
                                       ),
                                       Expanded(
                                         child: Text(
-                                          '${formatDate(crack.timestamp)}',
+                                          formatDate(crack.timestamp),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
@@ -108,13 +109,13 @@ class _RecentCrackListPageState extends State<RecentCrackListPage> {
                                   ),
                                   Row(
                                     children: [
-                                      Text(
+                                      const Text(
                                         '위치: ',
                                         style: TextStyle(fontWeight: FontWeight.bold),
                                       ),
                                       Expanded(
                                         child: Text(
-                                          '${crack.title}',
+                                          crack.title,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),

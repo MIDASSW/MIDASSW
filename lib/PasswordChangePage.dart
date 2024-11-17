@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class PasswordChangePage extends StatefulWidget {
+  const PasswordChangePage({super.key});
+
   @override
   _PasswordChangeScreenState createState() => _PasswordChangeScreenState();
 }
@@ -30,13 +32,13 @@ void _showPasswordChangedDialog() {
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: Colors.white,
-        content: Text('비밀번호가 변경되었습니다.', style: TextStyle(fontSize: 18)),
+        content: const Text('비밀번호가 변경되었습니다.', style: TextStyle(fontSize: 18)),
         actions: <Widget>[
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('확인',style:TextStyle(color:Colors.black)),
+            child: const Text('확인',style:TextStyle(color:Colors.black)),
           ),
         ],
       );
@@ -51,13 +53,13 @@ void _showPasswordChangedDialog() {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           '비밀번호 변경',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -102,7 +104,7 @@ void _showPasswordChangedDialog() {
                     return null;
                   },
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 TextFormField(
                   controller: _newPasswordController,
                   inputFormatters: <TextInputFormatter>[LengthLimitingTextInputFormatter(20)],
@@ -137,7 +139,7 @@ void _showPasswordChangedDialog() {
                     return null;
                   },
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 TextFormField(
                   controller: _confirmNewPasswordController,
                   inputFormatters: <TextInputFormatter>[LengthLimitingTextInputFormatter(20)],
@@ -169,7 +171,7 @@ void _showPasswordChangedDialog() {
                     return null;
                   },
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -177,9 +179,9 @@ void _showPasswordChangedDialog() {
                     }
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 196, 196, 196)),
-                    fixedSize: MaterialStateProperty.all<Size>(const Size(160, 20)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    backgroundColor: WidgetStateProperty.all<Color>(const Color.fromARGB(255, 196, 196, 196)),
+                    fixedSize: WidgetStateProperty.all<Size>(const Size(160, 20)),
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),

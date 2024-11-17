@@ -287,10 +287,10 @@ class _RegisterPageState extends State<RegisterPage> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text('확인'),
             style: TextButton.styleFrom(
               foregroundColor: Colors.black,
             ),
+            child: const Text('확인'),
           ),
         ],
       ),

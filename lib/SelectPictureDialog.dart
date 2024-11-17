@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SelectPictureDialog extends StatefulWidget {
+  const SelectPictureDialog({super.key});
+
   @override
   _SelectPictureDialogState createState() => _SelectPictureDialogState();
 }
@@ -15,12 +17,12 @@ class _SelectPictureDialogState extends State<SelectPictureDialog> {
       ),
       child: Container(
         height: 200.0,
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ListTile(
-              title: Text(
+              title: const Text(
                 '사진 촬영',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18),
@@ -29,9 +31,9 @@ class _SelectPictureDialogState extends State<SelectPictureDialog> {
                 
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ListTile(
-              title: Text(
+              title: const Text(
                 '앨범에서 선택',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18),
