@@ -1,10 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<uses-permission android:name="android.permission.INTERNET"/>    
     <application
         android:label="CRACKHOLE"
         android:name="${applicationName}"
         android:icon="@mipmap/logo">
          <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyBS9eBoziroOVJYfMoJ6iE6CZKcmA4DRZc"/>
+               android:value="AIzaSyC8xVMS26rMb8EP_LdwWNG5SPmMSTbGmpQ"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
